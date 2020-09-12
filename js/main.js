@@ -7,8 +7,8 @@ width = 620,
 var margin = {
     top: 50,
     right: 50,
-    bottom: 50,
-    left: 50
+    bottom: 70,
+    left: 70
 }
 
 //acceder a los datos popr D3
@@ -51,15 +51,32 @@ var generateViz = (data) => {
     y = d3.scaleLinear()
         .domain([(d3.max(data, d => +d.valor)), (d3.min(data, d => +d.valor) - 100)]) //por que se pone max-min
         .range([margin.top, height - margin.bottom])
+    c= d3.scaleOrdinal(d3.schemeCategory10);
 
     // definir ejes
 
     yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y))
+        .append("text")
+         .attr("transform", "rotate(-90)")
+         .attr("y", 6)
+          .attr("x",-200)
+         .attr("dy", "-5.1em")
+         .attr("text-anchor", "end")
+         .attr("stroke", "black")
+         .text("Cantidad de Viajes");
+    
     xAxis = g => g
         .attr("transform", `translate(0,${height-margin.bottom})`)
-        .call(d3.axisBottom(x))
+        .call(d3.axisBottom(x))    
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform","rotate(-65)")
+        
+        ;
 
     // dibujar las barras
     svg = d3.select(".dataviz > svg")
@@ -72,9 +89,11 @@ var generateViz = (data) => {
         .data(d => d)
         .join("rect")
         .attr("y", d => y(d.valor))
-        .attr("x", (d) => x(d.mes))
+        .attr("x", (d) => x(d.mes)+13)
         .attr("height", d => y(d3.min(data, d => +d.valor)-100) - y(+d.valor))
         .attr("width", 20)
+        .attr("stroke","black")
+        .attr("fill",d=>c(d.mes))
         //.call(enter => enter.transition(t))
         svg.selectAll('.xaxis').data([0]).join('g').attr('class', 'xaxis')
         .call(xAxis);
