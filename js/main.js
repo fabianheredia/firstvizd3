@@ -51,6 +51,7 @@ var generateViz = (data) => {
     y = d3.scaleLinear()
         .domain([(d3.max(data, d => +d.valor)), (d3.min(data, d => +d.valor) - 100)]) //por que se pone max-min
         .range([margin.top, height - margin.bottom])
+    c= d3.scaleOrdinal(d3.schemeCategory10);
 
     // definir ejes
 
@@ -91,6 +92,8 @@ var generateViz = (data) => {
         .attr("x", (d) => x(d.mes)+13)
         .attr("height", d => y(d3.min(data, d => +d.valor)-100) - y(+d.valor))
         .attr("width", 20)
+        .attr("stroke","black")
+        .attr("fill",d=>c(d.mes))
         //.call(enter => enter.transition(t))
         svg.selectAll('.xaxis').data([0]).join('g').attr('class', 'xaxis')
         .call(xAxis);
