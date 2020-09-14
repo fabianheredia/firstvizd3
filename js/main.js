@@ -88,7 +88,7 @@ var generateViz = (data) => {
 
 
     // dib0ujar las barras
-    var colorScale = d3.scaleOrdinal(d3.schemeDark2);
+    var colorScale = d3.scaleOrdinal(d3.schemePaired);
 
     svg = d3.select(".dataviz > svg")
         .attr("id", "viz")
