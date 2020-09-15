@@ -1,8 +1,31 @@
+$(".button").click(function (e) {
+    e.preventDefault();
+
+    $(".button").css("background-color","#F85F5F");
+
+    var i = 0;
+    if (e.target.id == "row41"){
+        $("#row41").css("background-color","steelblue");
+        i = 0;
+    }else if(e.target.id == "row42"){
+        $("#row42").css("background-color","steelblue");
+        i = 1;
+    }else if(e.target.id == "row43"){
+        $("#row43").css("background-color","steelblue");
+        i = 2;
+    }else{
+        $("#row44").css("background-color","steelblue");
+        i = 3;
+    }
+    getData(_urlData,i)
+});
+
+
 const _urlData = "https://www.datos.gov.co/resource/sfav-4met.json"
 
 // margenes
 width = 620,
-    height = 400
+    height = 300
 var margin = {
     top: 50,
     right: 50,
@@ -17,22 +40,21 @@ d3.json(_urlData).then(datos => {
     
     })*/
 
-//Acceder por un paquete diferente
-var getData = (url) => {
+var getData = (url,index) => {
     axios.get(url).then((response) => {
-        console.log(response.data);
+        //console.log(index, response.data);
         //organizar la info
         misdatos = []
-        for (i in response.data[0]) {
+        for (i in response.data[index]) {
             if (i != 'indicadores') {
                 datomes = {}
                 datomes.mes = i
-                datomes.valor = response.data[0][i]
+                datomes.valor = response.data[index][i]
                 misdatos.push(datomes)
             }
         }
         generateViz(misdatos)
-        console.log(misdatos);
+        //console.log(misdatos);
     })
 }
 
@@ -81,4 +103,5 @@ var generateViz = (data) => {
         .call(yAxis);
 
 }
-getData(_urlData)
+getData(_urlData,0)
+$("#row41").css("background-color","steelblue");
