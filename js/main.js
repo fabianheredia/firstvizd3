@@ -92,7 +92,7 @@ var generateViz = (data) => {
 
 function onMouseOver(i, d) {
     d3.select(this)
-      .style("fill", "yellow");
+      .style("fill", "#00d1b2");
     svg.append("text")
         .attr("id", "idTexto")
         .attr("x", 60)
