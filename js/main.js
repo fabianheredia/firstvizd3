@@ -72,7 +72,7 @@ var generateViz = (data) => {
         .data(d => d)
         .join("rect")
         .attr("y", d => y(d.valor))
-        .attr("x", (d) => x(d.mes))
+        .attr("x", (d) => x(d.mes) + 10)
         .attr("height", d => y(d3.min(data, d => +d.valor)-100) - y(+d.valor))
         .attr("width", 20)
         //.call(enter => enter.transition(t))
