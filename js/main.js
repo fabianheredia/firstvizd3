@@ -11,14 +11,6 @@ var margin = {
     left: 50
 }
 
-//Nuevas variables para facilitar el manejo de las barras y centrarlas
-qElements = data.length; //cantidad de elementos a presentar
-av_space = width-margin.left-margin.right; // calcula automaticamente el espacio disponible para pintar la gráfica
-
-bar_width = av_space/(2*qElements); // calcula automaticamente el ancho de la barra para que ocupe solo un espacio disponible y no se traslape con las otras
-bar_offset = av_space/(qElements*2)-(bar_width/2); // calcula el espacio que se debe mover la barra para quedar centrada
-
-
 //acceder a los datos popr D3
 /*
 d3.json(_urlData).then(datos => {
@@ -51,6 +43,13 @@ var getData = (url) => {
 
 var generateViz = (data) => {
 
+    //Nuevas variables para facilitar el manejo de las barras y centrarlas
+    qElements = data.length; //cantidad de elementos a presentar
+    av_space = width-margin.left-margin.right; // calcula automaticamente el espacio disponible para pintar la gráfica
+
+    bar_width = av_space/(2*qElements); // calcula automaticamente el ancho de la barra para que ocupe solo un espacio disponible y no se traslape con las otras
+    bar_offset = av_space/(qElements*2)-(bar_width/2); // calcula el espacio que se debe mover la barra para quedar centrada
+    
     // definicion de escalas
 
     x = d3.scaleBand()
