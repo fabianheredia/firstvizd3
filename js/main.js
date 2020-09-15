@@ -1,7 +1,6 @@
 const _urlData = "https://www.datos.gov.co/resource/sfav-4met.json"
 
 // margenes
-
 width = 620,
     height = 400
 var margin = {
@@ -19,7 +18,6 @@ d3.json(_urlData).then(datos => {
     })*/
 
 //Acceder por un paquete diferente
-
 var getData = (url) => {
     axios.get(url).then((response) => {
         console.log(response.data);
@@ -32,28 +30,26 @@ var getData = (url) => {
                 datomes.valor = response.data[0][i]
                 misdatos.push(datomes)
             }
-
         }
         generateViz(misdatos)
         console.log(misdatos);
-
-        //TODO generar la viz
     })
 }
 
 var generateViz = (data) => {
 
     // definicion de escalas
-
     x = d3.scaleBand()
         .domain(data.map(d => d.mes))
         .rangeRound([margin.left, width - margin.right])
+        .paddingInner(0.2)
+        .paddingOuter(0.2);
+
     y = d3.scaleLinear()
         .domain([(d3.max(data, d => +d.valor)), (d3.min(data, d => +d.valor) - 100)]) //por que se pone max-min
         .range([margin.top, height - margin.bottom])
 
     // definir ejes
-
     yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y))
@@ -64,8 +60,9 @@ var generateViz = (data) => {
     // dibujar las barras
     svg = d3.select(".dataviz > svg")
         .attr("id", "viz")
-        .attr("viewBox",[0,0,width, height])
-        svg.selectAll('.bars').data([data]).join('g').attr('class', 'bars')
+        .attr("viewBox",[0,0,width, height]);
+
+    svg.selectAll('.bars').data([data]).join('g').attr('class', 'bars')
         //append("g")
         .attr("fill", "steelblue")
         .selectAll("rect")
@@ -74,14 +71,14 @@ var generateViz = (data) => {
         .attr("y", d => y(d.valor))
         .attr("x", (d) => x(d.mes))
         .attr("height", d => y(d3.min(data, d => +d.valor)-100) - y(+d.valor))
-        .attr("width", 20)
+        .attr("width", x.bandwidth);
+
         //.call(enter => enter.transition(t))
-        svg.selectAll('.xaxis').data([0]).join('g').attr('class', 'xaxis')
+    svg.selectAll('.xaxis').data([0]).join('g').attr('class', 'xaxis')
         .call(xAxis);
 
-        svg.selectAll('.yaxis').data([0]).join('g').attr('class', 'yaxis')
+    svg.selectAll('.yaxis').data([0]).join('g').attr('class', 'yaxis')
         .call(yAxis);
 
 }
-
 getData(_urlData)
