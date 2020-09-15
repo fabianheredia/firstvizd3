@@ -19,37 +19,54 @@
 </head>
 
 <body>
-    <section class="hero is-primary">
+    <section class="hero is-info">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">My First Visualization Using D3 and Vega-Lite</h1>
-                <h2 class="subtitle">By <a href="https://github.com/fabianheredia" target="_blank">Fabián Heredia</a> and <a href="https://github.com/japoveda10" target="_blank">Julio Poveda</a></h2>
+                <h1 class="title has-text-centered">My First Visualization Using D3 and Vega-Lite</h1>
+                <h2 class="subtitle has-text-centered">By <a href="https://github.com/fabianheredia" target="_blank">Fabián Heredia</a> and <a href="https://github.com/japoveda10" target="_blank">Julio Poveda</a></h2>
             </div>
         </div>
     </section>
     
-    <section>
-        <div>
-            <h2 class="subtitle">Colombia's Agricultural Inputs Imports</h2>
-            <p>The objective of this visualization is to TO DO</p>
+    <section id="introduction">
+        <div class="container">
+            <h2 class="subtitle has-text-centered has-text-weight-bold">Colombia's Agricultural Inputs Imports</h2>
+            <p class="has-text-centered">The following visualizations provide a visual representation of Colombia's agricultural imports in 2019.</p>
         </div>
     </section>
-    <section>
-        <div class="dataviz" id="dataviz">
-            <svg></svg>
+
+    <section id="d3Viz">
+        <div id="d3Dataviz" class="container">
+            <h2 id="d3Subtitle" class="subtitle has-text-centered has-text-weight-bold">D3.js</h2>
+            <div class="dataviz" id="dataviz">
+                <svg></svg>
+            </div>
         </div>
     </section>
+
+    <section id="vegaLiteViz">
+        <div id="vegaLiteDataviz" class="container">
+            <h2 id="vegaLiteSubtitle" class="subtitle has-text-centered has-text-weight-bold">Vega-Lite</h2>
+            <div class="datavizVegaLite" id="datavizVegaLite">
+                <svg></svg>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="content has-text-centered">
-            <p>The data that is used for this visualization ara available at [Datos Abiertos]()</p>
+            <p>The data that is used for this visualization ara available at <a href="https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/IMPORTACI-N-Y-EXPORTACI-N-DE-PRODUCTOS-AGROPECUARI/sfav-4met" target="_blank">Datos Abiertos</a>
             <p>
-                This is an example for the Visual Analytics course at <a href="https://uniandes.edu.co/"><strong>Universidad de los Andes</strong></a>. This is the data's license:
-                <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+                This is an example for the <strong>Visual Analytics</strong> course at <a href="https://uniandes.edu.co/" target="_blank"><strong>Universidad de los Andes</strong></a>. This is the data's license:
+                <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY NC SA 4.0</a>.
             </p>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.11.1"></script>
     <script src="./js/main.js"></script>
 </body>
 
