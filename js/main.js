@@ -64,6 +64,7 @@ var generateViz = (data) => {
     yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y))
+
     xAxis = g => g
         .attr("transform", `translate(0,${height-margin.bottom})`)
         .call(d3.axisBottom(x))
